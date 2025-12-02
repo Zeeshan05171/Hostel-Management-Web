@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HostelEase - Modern Hostel Management System for university hostels with complete room, student, fee, and attendance management">
+    <meta name="keywords" content="hostel management, student management, room allocation, fees, attendance">
+    <title>HostelEase - Smart Hostel Management System</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    
+    <!-- ============================================
+         NAVIGATION BAR
+         ============================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-container">
+                <a href="#home" class="navbar-brand">HostelEase</a>
+                
+                <ul class="navbar-menu">
+                    <li><a href="#home" class="navbar-link active">Home</a></li>
+                    <li><a href="#features" class="navbar-link">Features</a></li>
+                    <li><a href="#admin" class="navbar-link">Admin</a></li>
+                    <li><a href="#warden" class="navbar-link">Warden</a></li>
+                    <li><a href="#student" class="navbar-link">Student</a></li>
+                    <li><a href="#contact" class="navbar-link">Contact</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle" title="Toggle theme"></button>
+                    </li>
+                    <li id="userInfo" class="hidden navbar-link"></li>
+                    <li id="loginBtn">
+                        <button class="btn btn-primary btn-sm" onclick="openModal('loginModal')">Login</button>
+                    </li>
+                    <li id="logoutBtn" class="hidden">
+                        <button class="btn btn-secondary btn-sm">Logout</button>
+                    </li>
+                </ul>
+                
+                <!-- Mobile toggle -->
+                <button class="navbar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section id="home" class="hero">
+        <!-- Animated background shapes -->
+        <div class="hero-shape"></div>
+        <div class="hero-shape"></div>
+        <div class="hero-shape"></div>
+        
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">Smart Hostel Management System</h1>
+            <p class="hero-description">
+                Streamline your hostel operations with our comprehensive management solution.
+                Manage rooms, students, fees, attendance, and more - all in one place.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-lg" onclick="openModal('loginModal')">Admin Login</button>
+                <button class="btn btn-outline btn-lg" onclick="openModal('loginModal')">Student Portal</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURES SECTION
+         ============================================ -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fade-in">Powerful Features</h2>
+                <p class="fade-in">Everything you need to manage your hostel efficiently</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏠</div>
+                    <h3 class="feature-title">Room Management</h3>
+                    <p class="feature-description">
+                        Manage rooms with ease. Track occupancy, assign students, and monitor room status in real-time.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Student Management</h3>
+                    <p class="feature-description">
+                        Complete student profiles with contact information, room assignments, and activity tracking.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Fee Management</h3>
+                    <p class="feature-description">
+                        Track payments, generate invoices, and manage dues with automated reminders.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Attendance Tracking</h3>
+                    <p class="feature-description">
+                        Daily attendance records with comprehensive reports and analytics.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🚪</div>
+                    <h3 class="feature-title">Visitor Management</h3>
+                    <p class="feature-description">
+                        Log visitor entries and exits with purpose tracking and security monitoring.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Complaints & Maintenance</h3>
+                    <p class="feature-description">
+                        Track and resolve maintenance issues and student complaints efficiently.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🍽️</div>
+                    <h3 class="feature-title">Mess Management</h3>
+                    <p class="feature-description">
+                        Daily menu planning and mess bill management with transparency.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Reports & Analytics</h3>
+                    <p class="feature-description">
+                        Comprehensive reports on occupancy, fees, attendance, and operations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ADMIN DASHBOARD SECTION
+         ============================================ -->
+    <section id="admin" class="dashboard hidden" id="adminSection">
+        <div class="container">
+            <h2 class="mb-4">Admin Dashboard</h2>
+            
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-icon">🏠</div>
+                    <div class="stat-card-value" id="stat-total_rooms" data-count="0">0</div>
+                    <div class="stat-card-label">Total Rooms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">✅</div>
+                    <div class="stat-card-value" id="stat-occupied_rooms" data-count="0">0</div>
+                    <div class="stat-card-label">Occupied Rooms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">🔓</div>
+                    <div class="stat-card-value" id="stat-available_rooms" data-count="0">0</div>
+                    <div class="stat-card-label">Available Rooms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">👥</div>
+                    <div class="stat-card-value" id="stat-total_students" data-count="0">0</div>
+                    <div class="stat-card-label">Total Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">💰</div>
+                    <div class="stat-card-value" id="stat-pending_fees" data-count="0">0</div>
+                    <div class="stat-card-label">Pending Fees</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">🚪</div>
+                    <div class="stat-card-value" id="stat-todays_visitors" data-count="0">0</div>
+                    <div class="stat-card-label">Today's Visitors</div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Layout with Sidebar -->
+            <div class="dashboard-layout mt-4">
+                <aside class="dashboard-sidebar">
+                    <h3 class="sidebar-title">Menu</h3>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-item">
+                            <a href="#dashboard" class="sidebar-link active">📊 Dashboard</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#rooms" class="sidebar-link">🏠 Rooms</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#students" class="sidebar-link">👥 Students</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#fees" class="sidebar-link">💰 Fees</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#attendance" class="sidebar-link">📋 Attendance</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#visitors" class="sidebar-link">🚪 Visitors</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#complaints" class="sidebar-link">🔧 Complaints</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#mess" class="sidebar-link">🍽️ Mess</a>
+                        </li>
+                    </ul>
+                </aside>
+                
+                <main class="dashboard-main">
+                    <!-- Rooms Table -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Rooms</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-header">
+                                <div class="table-search">
+                                    <input type="text" id="roomsSearch" class="form-input" placeholder="Search rooms...">
+                                </div>
+                                <div class="filters">
+                                    <select class="form-select" onchange="filterTable('roomsTable', 4, this.value)">
+                                        <option value="all">All Status</option>
+                                        <option value="vacant">Vacant</option>
+                                        <option value="occupied">Occupied</option>
+                                        <option value="maintenance">Maintenance</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table class="table" id="roomsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Room No</th>
+                                            <th>Type</th>
+                                            <th>Capacity</th>
+                                            <th>Occupancy</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data loaded by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Students Table -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Students</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-header">
+                                <div class="table-search">
+                                    <input type="text" id="studentsSearch" class="form-input" placeholder="Search students...">
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table class="table" id="studentsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Room</th>
+                                            <th>Contact</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data loaded by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fees Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Fees</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-header">
+                                <div class="table-search">
+                                    <input type="text" id="feesSearch" class="form-input" placeholder="Search fees...">
+                                </div>
+                                <div class="filters">
+                                    <select class="form-select" onchange="filterTable('feesTable', 3, this.value)">
+                                        <option value="all">All Status</option>
+                                        <option value="paid">Paid</option>
+                                        <option value="unpaid">Unpaid</option>
+                                        <option value="overdue">Overdue</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table class="table" id="feesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Amount</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data loaded by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         WARDEN SECTION
+         ============================================ -->
+    <section id="warden" class="dashboard hidden" id="wardenSection">
+        <div class="container">
+            <h2 class="mb-4">Warden Dashboard</h2>
+            
+            <div class="info-grid mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Today's Attendance</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table" id="attendanceTable">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Marked By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data loaded by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pending Complaints</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table" id="complaintsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Student</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data loaded by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Today's Visitors</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table" id="visitorsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Visitor</th>
+                                        <th>Student</th>
+                                        <th>Purpose</th>
+                                        <th>In Time</th>
+                                        <th>Out Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data loaded by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         STUDENT PORTAL SECTION
+         ============================================ -->
+    <section id="student" class="student-dashboard hidden" id="studentSection">
+        <div class="container">
+            <h2 class="mb-4">Student Portal</h2>
+            
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-info">
+                    <div class="profile-avatar">AS</div>
+                    <div class="profile-details">
+                        <h2>Your Profile</h2>
+                        <p id="studentName">Loading...</p>
+                        <p id="studentRoom">Room: Loading...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Info Grid -->
+            <div class="info-grid mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Fee Summary</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Amount</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentFeesTable">
+                                    <!-- Data loaded by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Attendance Summary</h3>
+                    </div>
+                    <div class="card-body" id="attendanceSummary">
+                        <!-- Data loaded by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mess Menu -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">Today's Mess Menu</h3>
+                </div>
+                <div class="card-body" id="messMenuContainer">
+                    <!-- Data loaded by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Complaint Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Submit Complaint</h3>
+                </div>
+                <div class="card-body">
+                    <form id="complaintForm">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" id="complaintTitle" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea id="complaintDescription" class="form-textarea" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select id="complaintCategory" class="form-select" required>
+                                <option value="">Select category</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="cleaning">Cleaning</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Priority</label>
+                            <select id="complaintPriority" class="form-select" required>
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT SECTION
+         ============================================ -->
+    <section id="contact" class="features">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Contact Us</h2>
+                <p>Have questions? We're here to help!</p>
+            </div>
+            
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <div class="card-body">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" id="contactName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="contactEmail" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Role</label>
+                            <select id="contactRole" class="form-select" required>
+                                <option value="">Select role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Warden">Warden</option>
+                                <option value="Student">Student</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea id="contactMessage" class="form-textarea" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer style="background: var(--bg-dark); color: var(--text-white); padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2025 HostelEase. All rights reserved.</p>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                Built with Django, PostgreSQL, and vanilla JavaScript
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         MODALS
+         ============================================ -->
+    
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Login</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" id="loginUsername" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="loginPassword" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
